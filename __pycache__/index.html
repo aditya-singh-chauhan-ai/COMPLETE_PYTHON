@@ -1,0 +1,2064 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Analyst Portfolio | Data → Insights → Business Decisions</title>
+    <meta name="description" content="Portfolio of a Data Analyst specializing in SQL, Python, Excel, Power BI, data visualization, and business analytics.">
+    
+    <!-- Open Graph / Meta -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Data Analyst Portfolio | Data → Insights → Decisions">
+    <meta property="og:description" content="Transforming raw data into actionable insights using SQL, Python, Power BI, and statistical analysis.">
+    
+    <!-- Google Fonts & Chart.js -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* ==========================================================================
+           1. DESIGN SYSTEM & CUSTOM PROPERTIES
+           ========================================================================== */
+        :root {
+            --bg-base: #0a0d14;
+            --bg-surface: #111622;
+            --bg-surface-elevated: #1a2030;
+            --bg-glass: rgba(17, 22, 34, 0.75);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(56, 189, 248, 0.4);
+            
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --text-subtle: #64748b;
+            
+            --accent-cyan: #38bdf8;
+            --accent-blue: #3b82f6;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-purple: #8b5cf6;
+            
+            --gradient-accent: linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%);
+            --gradient-glow: radial-gradient(circle at center, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+            
+            --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'Fira Code', monospace;
+            
+            --radius-sm: 6px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.2);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.3);
+            --shadow-glow: 0 0 25px rgba(56, 189, 248, 0.2);
+            
+            --transition-fast: 0.2s ease;
+            --transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        [data-theme="light"] {
+            --bg-base: #f8fafc;
+            --bg-surface: #ffffff;
+            --bg-surface-elevated: #f1f5f9;
+            --bg-glass: rgba(255, 255, 255, 0.85);
+            --border-color: rgba(0, 0, 0, 0.08);
+            --border-hover: rgba(2, 132, 199, 0.4);
+            
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --text-subtle: #94a3b8;
+            
+            --accent-cyan: #0284c7;
+            --accent-blue: #2563eb;
+            --accent-emerald: #059669;
+            
+            --shadow-sm: 0 2px 8px rgba(0,0,0,0.05);
+            --shadow-md: 0 8px 24px rgba(0,0,0,0.08);
+            --shadow-glow: 0 0 25px rgba(2, 132, 199, 0.15);
+        }
+
+        /* ==========================================================================
+           2. BASE STYLES & RESET
+           ========================================================================== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color var(--transition-smooth), color var(--transition-smooth);
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+        button, input, textarea, select {
+            font-family: inherit;
+            font-size: inherit;
+            color: inherit;
+            background: none;
+            border: none;
+            outline: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 3.5rem;
+            text-align: left;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.35rem 0.85rem;
+            border-radius: 99px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            color: var(--accent-cyan);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1rem;
+        }
+
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--accent-emerald);
+            box-shadow: 0 0 8px var(--accent-emerald);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 2.75rem);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            max-width: 650px;
+        }
+
+        /* Buttons & Controls */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .btn-primary {
+            background: var(--gradient-accent);
+            color: #ffffff;
+            box-shadow: var(--shadow-glow);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.95;
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(56, 189, 248, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--bg-surface-elevated);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+            background: var(--bg-surface);
+        }
+
+        .btn-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: var(--radius-md);
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--border-color);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .btn-icon:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        /* Card Primitive */
+        .card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem;
+            transition: border-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            border-color: var(--border-hover);
+        }
+
+        /* ==========================================================================
+           3. NAVBAR
+           ========================================================================== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: var(--bg-glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-color);
+            transition: all var(--transition-fast);
+        }
+
+        .navbar-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .brand-logo {
+            font-size: 1.25rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: -0.03em;
+        }
+
+        .brand-logo .accent {
+            color: var(--accent-cyan);
+            font-family: var(--font-mono);
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+        }
+
+        .nav-link {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            transition: color var(--transition-fast);
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: var(--text-main);
+        }
+
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-cyan);
+            border-radius: 2px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .mobile-toggle {
+            display: none;
+        }
+
+        /* ==========================================================================
+           4. HERO SECTION & LIVE DASHBOARD WIDGET
+           ========================================================================== */
+        .hero {
+            padding-top: 10rem;
+            padding-bottom: 6rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content h1 .highlight {
+            background: var(--gradient-accent);
+            background-clip: text; /* standard property for compatibility */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-tagline {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: var(--accent-cyan);
+            margin-bottom: 1.25rem;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            max-width: 580px;
+        }
+
+        .hero-ctas {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Hero Mini Analytics Dashboard Mockup */
+        .hero-dashboard {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            position: relative;
+        }
+
+        .hero-dashboard::before {
+            content: '';
+            position: absolute;
+            top: -10%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: var(--gradient-glow);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .dash-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .dash-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .kpi-card {
+            background: var(--bg-surface-elevated);
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .kpi-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+
+        .kpi-value {
+            font-size: 1.35rem;
+            font-weight: 800;
+            font-family: var(--font-mono);
+        }
+
+        .kpi-trend {
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            margin-top: 0.25rem;
+        }
+
+        .trend-up { color: var(--accent-emerald); }
+        .trend-down { color: #ef4444; }
+
+        .dash-chart-container {
+            height: 180px;
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .sql-snippet-mini {
+            background: #090d16;
+            border-radius: var(--radius-sm);
+            padding: 0.75rem;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: #38bdf8;
+            overflow-x: auto;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* ==========================================================================
+           5. QUICK STATS
+           ========================================================================== */
+        .stats-section {
+            padding: 2rem 0 4rem 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 2rem 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 2.75rem;
+            font-weight: 800;
+            font-family: var(--font-mono);
+            color: var(--accent-cyan);
+            margin-bottom: 0.25rem;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* ==========================================================================
+           6. ABOUT ME & WORKFLOW
+           ========================================================================== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-text p {
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+            font-size: 1.05rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .service-item {
+            background: var(--bg-surface-elevated);
+            padding: 1.25rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .service-item h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+            color: var(--text-main);
+        }
+
+        .service-item p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* Workflow Steps */
+        .workflow-container {
+            margin-top: 4rem;
+        }
+
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            position: relative;
+        }
+
+        .workflow-step {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            text-align: center;
+            position: relative;
+            transition: all var(--transition-fast);
+        }
+
+        .workflow-step:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+        }
+
+        .step-num {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+        }
+
+        .step-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           7. SKILLS MATRIX
+           ========================================================================== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.75rem;
+        }
+
+        .skill-category-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--accent-cyan);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+        }
+
+        .skill-tag {
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 0.85rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all var(--transition-fast);
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           8. PROJECTS Showcase & Filter Engine
+           ========================================================================== */
+        .project-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1.1rem;
+            border-radius: 99px;
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: var(--accent-cyan);
+            color: #000;
+            border-color: var(--accent-cyan);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .project-category {
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .project-description {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+            flex-grow: 1;
+        }
+
+        .project-metric-box {
+            background: var(--bg-surface-elevated);
+            border: 1px dashed rgba(56, 189, 248, 0.3);
+            border-radius: var(--radius-md);
+            padding: 0.75rem 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .project-metric-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .project-metric-value {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--accent-emerald);
+        }
+
+        .project-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tool-badge {
+            font-size: 0.75rem;
+            background: var(--bg-surface-elevated);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+        }
+
+        .project-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: auto;
+        }
+
+        /* ==========================================================================
+           9. SQL LAB (INTERACTIVE COMPONENT)
+           ========================================================================== */
+        .sql-lab-container {
+            background: #090d16;
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+        }
+
+        .sql-header {
+            background: #111622;
+            padding: 0.85rem 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sql-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .window-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .dot-red { background: #ef4444; }
+        .dot-yellow { background: #f59e0b; }
+        .dot-green { background: #10b981; }
+
+        .sql-selector {
+            display: flex;
+            gap: 0.5rem;
+            overflow-x: auto;
+            padding: 0.75rem 1.25rem;
+            background: #0d121f;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sql-tab {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: var(--radius-sm);
+            background: transparent;
+            color: var(--text-muted);
+            cursor: pointer;
+            border: 1px solid transparent;
+            white-space: nowrap;
+        }
+
+        .sql-tab.active {
+            background: var(--bg-surface-elevated);
+            color: var(--accent-cyan);
+            border-color: var(--border-color);
+        }
+
+        .sql-body {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .sql-editor-pane {
+            padding: 1.25rem;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .sql-code {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: #38bdf8;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            margin-bottom: 1rem;
+        }
+
+        .sql-results-pane {
+            padding: 1.25rem;
+            background: #0b0f19;
+            overflow-x: auto;
+        }
+
+        .sql-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+        }
+
+        .sql-table th {
+            text-align: left;
+            padding: 0.5rem 0.75rem;
+            background: var(--bg-surface-elevated);
+            color: var(--accent-cyan);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .sql-table td {
+            padding: 0.5rem 0.75rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+        }
+
+        /* ==========================================================================
+           10. DATA STORIES (INTERACTIVE CHART SHOWCASE)
+           ========================================================================== */
+        .chart-showcase-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .chart-wrapper {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            height: 380px;
+            position: relative;
+        }
+
+        /* ==========================================================================
+           11. EXPERIENCE & EDUCATION TIMELINES
+           ========================================================================== */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.25rem;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent-cyan);
+            box-shadow: 0 0 10px var(--accent-cyan);
+        }
+
+        .timeline-date {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            margin-bottom: 0.35rem;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .timeline-company {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+        }
+
+        .timeline-bullets {
+            list-style-type: disc;
+            padding-left: 1.25rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .timeline-bullets li {
+            margin-bottom: 0.4rem;
+        }
+
+        /* ==========================================================================
+           12. CERTIFICATIONS & ACHIEVEMENTS
+           ========================================================================== */
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cert-issuer {
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .cert-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-date {
+            font-size: 0.75rem;
+            color: var(--text-subtle);
+            margin-bottom: 1rem;
+        }
+
+        /* ==========================================================================
+           13. CONTACT & FOOTER
+           ========================================================================== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+        }
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--bg-surface-elevated);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            color: var(--text-main);
+            transition: border-color var(--transition-fast);
+        }
+
+        .form-input:focus, .form-textarea:focus {
+            border-color: var(--accent-cyan);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .footer {
+            padding: 3rem 0;
+            border-top: 1px solid var(--border-color);
+            margin-top: 4rem;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* ==========================================================================
+           14. MODAL SYSTEM FOR CASE STUDIES
+           ========================================================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity var(--transition-smooth);
+            padding: 1.5rem;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-container {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 850px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2.5rem;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform var(--transition-smooth);
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+
+        .modal-close:hover { color: var(--text-main); }
+
+        .modal-section-title {
+            font-size: 0.9rem;
+            font-family: var(--font-mono);
+            color: var(--accent-cyan);
+            text-transform: uppercase;
+            margin-top: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* ==========================================================================
+           15. RESPONSIVE DESIGN (MOBILE-FIRST BREAKPOINTS)
+           ========================================================================== */
+        @media (max-width: 992px) {
+            .hero-grid, .about-grid, .chart-showcase-grid, .contact-grid, .sql-body {
+                grid-template-columns: 1fr;
+            }
+            .sql-editor-pane {
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                position: fixed;
+                top: 72px;
+                left: 0;
+                width: 100%;
+                background: var(--bg-surface);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid var(--border-color);
+                transform: translateY(-150%);
+                transition: transform var(--transition-smooth);
+            }
+            .nav-menu.active {
+                transform: translateY(0);
+            }
+            .mobile-toggle {
+                display: block;
+            }
+            .section { padding: 4rem 0; }
+            .hero { padding-top: 7rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="container navbar-container">
+            <a href="#" class="brand-logo">
+                <i data-lucide="bar-chart-2"></i>
+                <span>ANALYST<span class="accent">.DATA</span></span>
+            </a>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#skills" class="nav-link">Skills</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#sql-lab" class="nav-link">SQL Lab</a></li>
+                <li><a href="#experience" class="nav-link">Experience</a></li>
+                <li><a href="#certifications" class="nav-link">Certifications</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="btn-icon" id="themeToggle" title="Toggle Theme">
+                    <i data-lucide="moon" id="themeIcon"></i>
+                </button>
+                <a href="#contact" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.85rem;">Connect</a>
+                <button class="btn-icon mobile-toggle" id="mobileMenuToggle">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <div class="badge">
+                    <span class="badge-dot"></span>
+                    <span id="heroBadge">OPEN TO WORK • DATA ANALYST</span>
+                </div>
+                <h1 id="heroName">Hi, I'm Alex Morgan.</h1>
+                <div class="hero-tagline" id="heroTagline">I turn data into actionable business insights.</div>
+                <p class="hero-description" id="heroDescription">
+                    Data Analyst specializing in transforming raw, complex datasets into strategic decisions using SQL, Python, Excel, Power BI, and statistical modeling.
+                </p>
+                <div class="hero-ctas">
+                    <a href="#projects" class="btn btn-primary">
+                        <span>View Portfolio</span>
+                        <i data-lucide="arrow-right"></i>
+                    </a>
+                    <a href="#" class="btn btn-secondary" id="resumeBtn" target="_blank">
+                        <i data-lucide="download"></i>
+                        <span>Resume</span>
+                    </a>
+                </div>
+                <div class="social-links" id="socialLinks">
+                    <!-- Dynamic Social Links -->
+                </div>
+            </div>
+
+            <!-- Hero Live Visual Mockup -->
+            <div class="hero-dashboard">
+                <div class="dash-header">
+                    <div class="dash-title">
+                        <i data-lucide="activity" style="width: 16px; color: var(--accent-cyan);"></i>
+                        <span>Executive KPI Snapshot (Demo Data)</span>
+                    </div>
+                    <span style="font-size: 0.7rem; color: var(--text-subtle);">LIVE ENGINE</span>
+                </div>
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-label">Annual Revenue</div>
+                        <div class="kpi-value" style="color: var(--accent-cyan);">₹12.8L</div>
+                        <div class="kpi-trend trend-up"><i data-lucide="trending-up" style="width: 12px;"></i> +18.4% YoY</div>
+                    </div>
+                    <div class="kpi-card">
+                        <div class="kpi-label">Conversion Rate</div>
+                        <div class="kpi-value">7.8%</div>
+                        <div class="kpi-trend trend-up"><i data-lucide="trending-up" style="width: 12px;"></i> +2.1% MoM</div>
+                    </div>
+                </div>
+                <div class="dash-chart-container">
+                    <canvas id="heroChart"></canvas>
+                </div>
+                <div class="sql-snippet-mini">
+                    <span style="color: #64748b;">-- Executive Query</span><br>
+                    <span style="color: #f59e0b;">SELECT</span> region, <span style="color: #f59e0b;">SUM</span>(revenue) <span style="color: #f59e0b;">FROM</span> sales_db <span style="color: #f59e0b;">GROUP BY</span> 1;
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUICK STATS -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid" id="quickStatsGrid">
+                <!-- Dynamically Rendered -->
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT & WORKFLOW -->
+    <section class="section" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Data-Driven Problem Solver</h2>
+                <p class="section-subtitle">Bridging the gap between raw unstructured data and high-level strategy.</p>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-text">
+                    <p id="aboutBioP1">
+                        I specialize in querying databases, cleaning messy telemetry, statistical modeling, and designing executive dashboards that eliminate business ambiguity.
+                    </p>
+                    <p id="aboutBioP2">
+                        Whether calculating customer lifetime value (CLV), analyzing churn risk, or optimizing pipeline logistics, my focus is always on quantifiable business impact.
+                    </p>
+                    <div class="services-grid">
+                        <div class="service-item">
+                            <h4>SQL & Querying</h4>
+                            <p>Complex JOINs, CTEs, Window functions & optimization.</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>BI Dashboards</h4>
+                            <p>Interactive Power BI & Tableau dashboards with DAX.</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>Python Analytics</h4>
+                            <p>Exploratory Analysis via Pandas, NumPy & Seaborn.</p>
+                        </div>
+                        <div class="service-item">
+                            <h4>Statistical Analysis</h4>
+                            <p>Hypothesis testing, regression & cohort analytics.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Workflow Process Engine -->
+                <div>
+                    <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 1.5rem;">How I Work With Data</h3>
+                    <div class="workflow-grid" id="workflowGrid">
+                        <!-- Dynamically Generated Steps -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS MATRIX -->
+    <section class="section" id="skills" style="background: var(--bg-surface-elevated);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Technical Expertise</h2>
+                <p class="section-subtitle">Battle-tested tools and frameworks in my analytics stack.</p>
+            </div>
+            <div class="skills-grid" id="skillsGrid">
+                <!-- Dynamically Rendered -->
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS SHOWCASE -->
+    <section class="section" id="projects">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Featured Case Studies</h2>
+                <p class="section-subtitle">Real analytics problems solved with measurable outcomes.</p>
+            </div>
+
+            <!-- Filters -->
+            <div class="project-filters" id="projectFilters">
+                <!-- Dynamic Filters -->
+            </div>
+
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Dynamically Rendered Projects -->
+            </div>
+        </div>
+    </section>
+
+    <!-- SQL LAB SECTION -->
+    <section class="section" id="sql-lab" style="background: var(--bg-surface-elevated);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Interactive SQL Lab</h2>
+                <p class="section-subtitle">Test real analytical queries against simulated database tables in real-time.</p>
+            </div>
+
+            <div class="sql-lab-container">
+                <div class="sql-header">
+                    <div class="sql-controls">
+                        <div class="window-dot dot-red"></div>
+                        <div class="window-dot dot-yellow"></div>
+                        <div class="window-dot dot-green"></div>
+                    </div>
+                    <span style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">SQL Execution Engine v2.4</span>
+                </div>
+
+                <div class="sql-selector" id="sqlTabs">
+                    <!-- Dynamic Tabs -->
+                </div>
+
+                <div class="sql-body">
+                    <div class="sql-editor-pane">
+                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem; font-weight: 600;" id="sqlQuestionTitle">
+                            Question Focus
+                        </div>
+                        <div class="sql-code" id="sqlCodeDisplay">
+                            -- Select a tab above to load query
+                        </div>
+                        <button class="btn btn-primary" id="runSqlQueryBtn" style="padding: 0.4rem 1rem; font-size: 0.8rem;">
+                            <i data-lucide="play" style="width: 14px;"></i> Run Query
+                        </button>
+                    </div>
+                    <div class="sql-results-pane">
+                        <div style="font-size: 0.8rem; color: var(--accent-cyan); margin-bottom: 0.5rem; font-family: var(--font-mono);">
+                            Query Result Output
+                        </div>
+                        <div id="sqlResultOutput">
+                            <!-- Rendered Table -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DATA STORIES / CHART SHOWCASE -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Data Stories & Visualizations</h2>
+                <p class="section-subtitle">Exploratory analytics and trend models visual breakdown.</p>
+            </div>
+
+            <div class="chart-showcase-grid">
+                <div class="chart-wrapper">
+                    <canvas id="interactiveStoryChart"></canvas>
+                </div>
+                <div class="card">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0.75rem;" id="chartStoryTitle">Cohort Retention Analysis</h3>
+                    <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;" id="chartStoryDesc">
+                        Visualizing customer retention across 6-month cohorts shows a clear stabilizing inflection point at Month 3 following onboarding optimization.
+                    </p>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <button class="btn btn-secondary" id="btnToggleChartData" style="width: 100%; font-size: 0.8rem;">Switch Metric</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPERIENCE TIMELINE -->
+    <section class="section" id="experience" style="background: var(--bg-surface-elevated);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Work & Practical Experience</h2>
+                <p class="section-subtitle">Track record of applying analytical rigor in commercial environments.</p>
+            </div>
+
+            <div class="timeline" id="experienceTimeline">
+                <!-- Dynamically Rendered -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATIONS & EDUCATION -->
+    <section class="section" id="certifications">
+        <div class="container">
+            <div class="about-grid">
+                <div>
+                    <div class="section-header" style="margin-bottom: 2rem;">
+                        <h2 class="section-title" style="font-size: 1.8rem;">Certifications</h2>
+                    </div>
+                    <div class="certs-grid" id="certsGrid">
+                        <!-- Dynamically Rendered -->
+                    </div>
+                </div>
+
+                <div>
+                    <div class="section-header" style="margin-bottom: 2rem;">
+                        <h2 class="section-title" style="font-size: 1.8rem;">Education</h2>
+                    </div>
+                    <div class="timeline" id="educationTimeline">
+                        <!-- Dynamically Rendered -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="section" id="contact" style="background: var(--bg-surface-elevated);">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Let's Work With Data</h2>
+                <p class="section-subtitle">Have a data challenge or open analyst position? Let's talk.</p>
+            </div>
+
+            <div class="contact-grid">
+                <div>
+                    <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 1.05rem;">
+                        I am currently actively seeking Data Analyst, Business Analyst, and BI roles. Feel free to reach out directly via form or through social platforms.
+                    </p>
+                    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div class="btn-icon"><i data-lucide="mail"></i></div>
+                            <div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">Email</div>
+                                <div style="font-weight: 600;" id="contactEmail">alex.morgan.analytics@example.com</div>
+                            </div>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 1rem;">
+                            <div class="btn-icon"><i data-lucide="map-pin"></i></div>
+                            <div>
+                                <div style="font-size: 0.75rem; color: var(--text-muted);">Location</div>
+                                <div style="font-weight: 600;" id="contactLocation">San Francisco, CA / Remote</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label class="form-label" for="contactName">Name</label>
+                            <input type="text" id="contactName" class="form-input" required placeholder="Jane Doe">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="contactEmailInput">Email</label>
+                            <input type="email" id contactEmailInput class="form-input" required placeholder="jane@company.com">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="contactMessage">Message</label>
+                            <textarea id="contactMessage" class="form-textarea" required placeholder="Discussing analyst roles or projects..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">
+                            <span>Send Message</span>
+                            <i data-lucide="send"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <p id="footerCopyright">© 2026 Alex Morgan. Built for Data & Business Decisions.</p>
+        </div>
+    </footer>
+
+    <!-- CASE STUDY MODAL -->
+    <div class="modal-overlay" id="caseStudyModal">
+        <div class="modal-container">
+            <div class="modal-close" id="modalCloseBtn"><i data-lucide="x"></i></div>
+            <div id="modalBody">
+                <!-- Dynamic Content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+       CENTRALIZED DATA STORE & APPLICATION LOGIC (EASY EDITING)
+       ========================================================================== -->
+    <script>
+        /**
+         * PORTFOLIO CENTRAL CONFIGURATION DATA FILE
+         * Edit all text, projects, skills, and values here directly!
+         */
+        const portfolioData = {
+            personal: {
+                name: "Alex Morgan",
+                title: "Data Analyst | Business Analytics",
+                badge: "OPEN TO WORK • DATA ANALYST",
+                tagline: "I turn raw data into actionable insights.",
+                description: "Data Analyst passionate about transforming complex datasets into meaningful decisions using SQL, Python, Excel, Power BI, and statistical modeling.",
+                email: "alex.morgan.analytics@example.com",
+                location: "San Francisco, CA (Open to Remote)",
+                resumeUrl: "#",
+                socials: {
+                    linkedin: "https://linkedin.com",
+                    github: "https://github.com",
+                    email: "mailto:alex.morgan.analytics@example.com"
+                }
+            },
+            stats: [
+                { value: "12+", label: "Analytics Projects" },
+                { value: "5+", label: "Certifications" },
+                { value: "4+", label: "Data Stack Tools" },
+                { value: "100k+", label: "Rows Processed" }
+            ],
+            workflow: [
+                { num: "01", title: "Collect", desc: "API, SQL databases, CSV extraction" },
+                { num: "02", title: "Clean", desc: "Pandas, null handling, type casting" },
+                { num: "03", title: "Explore", desc: "EDA, distributions, outlier detection" },
+                { num: "04", title: "Analyze", desc: "Statistical testing, cohort analytics" },
+                { num: "05", title: "Visualize", desc: "Power BI dashboards & Chart.js" },
+                { num: "06", title: "Decide", desc: "Executive recommendations & ROI" }
+            ],
+            skills: [
+                {
+                    category: "Programming & Querying",
+                    icon: "code",
+                    items: ["SQL (PostgreSQL, MySQL)", "Python (Pandas, NumPy)", "Excel (VBA, PowerQuery)", "DAX"]
+                },
+                {
+                    category: "Business Intelligence",
+                    icon: "bar-chart-3",
+                    items: ["Power BI", "Tableau", "Dashboard Design", "Data Modeling", "KPI Tracking"]
+                },
+                {
+                    category: "Analytics & Statistics",
+                    icon: "pie-chart",
+                    items: ["Exploratory Analysis (EDA)", "Cohort Analysis", "A/B Testing", "Churn Analytics", "Regression"]
+                },
+                {
+                    category: "Tools & Workflow",
+                    icon: "git-branch",
+                    items: ["Git / GitHub", "Jupyter Notebooks", "VS Code", "Postman"]
+                }
+            ],
+            projects: [
+                {
+                    id: "churn-analysis",
+                    title: "E-Commerce Customer Churn & Retention Model",
+                    category: "Python",
+                    tools: ["Python", "Pandas", "SQL", "Power BI"],
+                    description: "Analyzed 50,000+ customer accounts to identify primary drivers of 90-day post-purchase churn.",
+                    metric: "Identified risk factors cutting churn by ~14%",
+                    github: "https://github.com",
+                    live: "#",
+                    problem: "Customer retention fell by 8% over two quarters with unknown operational drivers.",
+                    dataset: "Kaggle E-Commerce Telecom & Shopping Dataset (50,000 customer logs).",
+                    insights: [
+                        "Customers utilizing live-chat support had a 32% lower churn probability.",
+                        "Shipping delays exceeding 4 days directly triggered a 3x increase in account cancellations."
+                    ],
+                    recommendations: "Automate automated SMS tracking updates and prioritize 1-on-1 support for orders > $100."
+                },
+                {
+                    id: "sales-dashboard",
+                    title: "Executive Revenue & Sales BI Dashboard",
+                    category: "Power BI",
+                    tools: ["Power BI", "DAX", "SQL Server"],
+                    description: "Built an automated multi-page BI dashboard providing real-time revenue breakdown across global sales territories.",
+                    metric: "Replaced 12 hrs/week of manual reporting",
+                    github: "https://github.com",
+                    live: "#",
+                    problem: "Regional sales directors relied on fragmented Excel sheets with inconsistent KPI metrics.",
+                    dataset: "Internal PostgreSQL ERP database connected via DirectQuery.",
+                    insights: [
+                        "European territory produced highest margin despite lower total order volume.",
+                        "Product category 'Tech Accessories' had a 42% cross-sell rate during Black Friday."
+                    ],
+                    recommendations: "Reallocate 15% marketing budget from APAC to high-margin European segments."
+                },
+                {
+                    id: "sql-inventory",
+                    title: "Supply Chain & Inventory Optimization Querying",
+                    category: "SQL",
+                    tools: ["PostgreSQL", "Window Functions", "CTEs"],
+                    description: "Wrote complex SQL pipelines to analyze warehouse stock turnover and identify overstock anomalies.",
+                    metric: "Reduced deadstock holding costs by $24,000",
+                    github: "https://github.com",
+                    live: "#",
+                    problem: "Warehouses were experiencing stockouts on high-demand items while holding deadstock for months.",
+                    dataset: "Supply chain transactional logs (120,000+ line items).",
+                    insights: [
+                        "Top 10% of SKUs accounted for 68% of warehouse throughput.",
+                        "Reorder point thresholds had not been adjusted for seasonal demand spikes."
+                    ],
+                    recommendations: "Implement dynamic reorder thresholds using rolling 30-day average SQL queries."
+                }
+            ],
+            sqlExamples: [
+                {
+                    id: "cte-cohort",
+                    title: "Customer Segment Revenue (CTE + Group By)",
+                    question: "What is the total revenue and order volume per customer tier?",
+                    code: `WITH CustomerStats AS (
+    SELECT 
+        customer_id,
+        COUNT(order_id) AS total_orders,
+        SUM(order_value) AS lifetime_value
+    FROM orders
+    GROUP BY customer_id
+)
+SELECT 
+    CASE 
+        WHEN lifetime_value > 1000 THEN 'VIP Tier'
+        WHEN lifetime_value BETWEEN 300 AND 1000 THEN 'Mid Tier'
+        ELSE 'Regular'
+    END AS customer_segment,
+    COUNT(customer_id) AS total_customers,
+    ROUND(AVG(lifetime_value), 2) AS avg_segment_spend
+FROM CustomerStats
+GROUP BY 1
+ORDER BY avg_segment_spend DESC;`,
+                    columns: ["customer_segment", "total_customers", "avg_segment_spend"],
+                    rows: [
+                        ["VIP Tier", "1,240", "$1,840.50"],
+                        ["Mid Tier", "4,520", "$520.10"],
+                        ["Regular", "12,100", "$112.40"]
+                    ]
+                },
+                {
+                    id: "window-rank",
+                    title: "Top Products per Region (Window Functions)",
+                    question: "Rank the top 2 selling products in each sales territory.",
+                    code: `WITH RankedProducts AS (
+    SELECT 
+        region,
+        product_name,
+        SUM(sales_amount) as total_sales,
+        DENSE_RANK() OVER (
+            PARTITION BY region 
+            ORDER BY SUM(sales_amount) DESC
+        ) as sales_rank
+    FROM regional_sales
+    GROUP BY region, product_name
+)
+SELECT region, product_name, total_sales
+FROM RankedProducts
+WHERE sales_rank <= 2;`,
+                    columns: ["region", "product_name", "total_sales"],
+                    rows: [
+                        ["North America", "Analytics Laptop Pro", "$450,000"],
+                        ["North America", "UltraMonitor 27in", "$280,000"],
+                        ["Europe", "ErgoDesk Workstation", "$310,000"],
+                        ["Europe", "Analytics Laptop Pro", "$290,000"]
+                    ]
+                }
+            ],
+            experience: [
+                {
+                    role: "Data Analyst Intern / Project Lead",
+                    company: "TechAnalytics Solutions",
+                    period: "Jan 2026 – Present",
+                    bullets: [
+                        "Analyzed 100,000+ user interaction records using Python and SQL to uncover churn predictors.",
+                        "Designed and published 4 interactive Power BI dashboards utilized daily by product leadership.",
+                        "Automated weekly status reporting queries, saving ~6 hours of manual execution time per week."
+                    ]
+                },
+                {
+                    role: "Business Analytics Practical Consultant",
+                    company: "Academic & Commercial Projects",
+                    period: "Jun 2025 – Dec 2025",
+                    bullets: [
+                        "Cleaned and transformed messy financial data using Pandas and SQL window functions.",
+                        "Presented data-driven recommendations to simulated executive boards with dynamic visual reports."
+                    ]
+                }
+            ],
+            certifications: [
+                { name: "Google Data Analytics Professional Certificate", issuer: "Coursera / Google", date: "2025" },
+                { name: "Microsoft Certified: Power BI Data Analyst Associate", issuer: "Microsoft", date: "2025" },
+                { name: "SQL for Data Science Specialization", issuer: "UC Davis", date: "2024" }
+            ],
+            education: [
+                {
+                    degree: "B.S. in Data Science / Information Systems",
+                    school: "State University",
+                    period: "2022 – 2026",
+                    gpa: "3.8 / 4.0",
+                    details: "Relevant Coursework: Database Management, Applied Statistics, Data Mining, Econometrics."
+                }
+            ]
+        };
+
+        /* ==========================================================================
+           CORE RENDER ENGINE & UI CONTROLLERS
+           ========================================================================== */
+        document.addEventListener("DOMContentLoaded", () => {
+            // Initialize Lucide Icons
+            lucide.createIcons();
+
+            // 1. Theme Toggle Persistence
+            const themeToggleBtn = document.getElementById("themeToggle");
+            const themeIcon = document.getElementById("themeIcon");
+            
+            const savedTheme = localStorage.getItem("theme") || "dark";
+            document.documentElement.setAttribute("data-theme", savedTheme);
+            updateThemeIcon(savedTheme);
+
+            themeToggleBtn.addEventListener("click", () => {
+                const currentTheme = document.documentElement.getAttribute("data-theme");
+                const newTheme = currentTheme === "dark" ? "light" : "dark";
+                document.documentElement.setAttribute("data-theme", newTheme);
+                localStorage.setItem("theme", newTheme);
+                updateThemeIcon(newTheme);
+            });
+
+            function updateThemeIcon(theme) {
+                if (theme === "light") {
+                    themeIcon.setAttribute("data-lucide", "sun");
+                } else {
+                    themeIcon.setAttribute("data-lucide", "moon");
+                }
+                lucide.createIcons();
+            }
+
+            // Mobile Navigation Toggle
+            const mobileToggle = document.getElementById("mobileMenuToggle");
+            const navMenu = document.getElementById("navMenu");
+            mobileToggle.addEventListener("click", () => {
+                navMenu.classList.toggle("active");
+            });
+
+            // 2. Populate Personal Data
+            document.getElementById("heroName").innerText = `Hi, I'm ${portfolioData.personal.name}.`;
+            document.getElementById("heroBadge").innerText = portfolioData.personal.badge;
+            document.getElementById("heroTagline").innerText = portfolioData.personal.tagline;
+            document.getElementById("heroDescription").innerText = portfolioData.personal.description;
+            document.getElementById("contactEmail").innerText = portfolioData.personal.email;
+            document.getElementById("contactLocation").innerText = portfolioData.personal.location;
+            document.getElementById("footerCopyright").innerText = `© 2026 ${portfolioData.personal.name}. Built for Data & Decisions.`;
+
+            // Render Social Links
+            const socialContainer = document.getElementById("socialLinks");
+            socialContainer.innerHTML = `
+                <a href="${portfolioData.personal.socials.linkedin}" target="_blank" class="btn-icon"><i data-lucide="linkedin"></i></a>
+                <a href="${portfolioData.personal.socials.github}" target="_blank" class="btn-icon"><i data-lucide="github"></i></a>
+                <a href="${portfolioData.personal.socials.email}" class="btn-icon"><i data-lucide="mail"></i></a>
+            `;
+
+            // 3. Render Quick Stats
+            const statsGrid = document.getElementById("quickStatsGrid");
+            statsGrid.innerHTML = portfolioData.stats.map(s => `
+                <div class="card stat-card">
+                    <div class="stat-number">${s.value}</div>
+                    <div class="stat-label">${s.label}</div>
+                </div>
+            `).join('');
+
+            // 4. Render Workflow Steps
+            const workflowGrid = document.getElementById("workflowGrid");
+            workflowGrid.innerHTML = portfolioData.workflow.map(w => `
+                <div class="workflow-step">
+                    <div class="step-num">${w.num}</div>
+                    <div class="step-title">${w.title}</div>
+                    <div class="step-desc">${w.desc}</div>
+                </div>
+            `).join('');
+
+            // 5. Render Skills Matrix
+            const skillsGrid = document.getElementById("skillsGrid");
+            skillsGrid.innerHTML = portfolioData.skills.map(sc => `
+                <div class="card">
+                    <div class="skill-category-title">
+                        <i data-lucide="${sc.icon}"></i>
+                        <span>${sc.category}</span>
+                    </div>
+                    <div class="skill-tags">
+                        ${sc.items.map(item => `<span class="skill-tag">${item}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+
+            // 6. Projects Showcase Filter Engine
+            const projectFiltersContainer = document.getElementById("projectFilters");
+            const categories = ["All", ...new Set(portfolioData.projects.map(p => p.category))];
+            
+            projectFiltersContainer.innerHTML = categories.map((c, i) => `
+                <button class="filter-btn ${i === 0 ? 'active' : ''}" data-category="${c}">${c}</button>
+            `).join('');
+
+            renderProjects("All");
+
+            projectFiltersContainer.addEventListener("click", (e) => {
+                if (e.target.classList.contains("filter-btn")) {
+                    document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+                    e.target.classList.add("active");
+                    renderProjects(e.target.dataset.category);
+                }
+            });
+
+            function renderProjects(category) {
+                const projectsGrid = document.getElementById("projectsGrid");
+                const filtered = category === "All" ? portfolioData.projects : portfolioData.projects.filter(p => p.category === category);
+                
+                projectsGrid.innerHTML = filtered.map(p => `
+                    <div class="card project-card">
+                        <div class="project-header">
+                            <span class="project-category">${p.category}</span>
+                            <i data-lucide="folder-git-2" style="color: var(--text-muted); width: 18px;"></i>
+                        </div>
+                        <h3 class="project-title">${p.title}</h3>
+                        <p class="project-description">${p.description}</p>
+                        
+                        <div class="project-metric-box">
+                            <div class="project-metric-label">Key Outcome</div>
+                            <div class="project-metric-value">${p.metric}</div>
+                        </div>
+
+                        <div class="project-tools">
+                            ${p.tools.map(t => `<span class="tool-badge">${t}</span>`).join('')}
+                        </div>
+
+                        <div class="project-actions">
+                            <button class="btn btn-primary view-case-study" data-id="${p.id}" style="width: 100%; font-size: 0.85rem;">
+                                Case Study
+                            </button>
+                            <a href="${p.github}" target="_blank" class="btn btn-secondary btn-icon"><i data-lucide="github"></i></a>
+                        </div>
+                    </div>
+                `).join('');
+
+                lucide.createIcons();
+
+                // Attach Case Study Modal Handlers
+                document.querySelectorAll(".view-case-study").forEach(btn => {
+                    btn.addEventListener("click", (e) => {
+                        const projId = e.currentTarget.dataset.id;
+                        openCaseStudyModal(projId);
+                    });
+                });
+            }
+
+            // 7. Case Study Modal Engine
+            const modal = document.getElementById("caseStudyModal");
+            const modalBody = document.getElementById("modalBody");
+            const modalCloseBtn = document.getElementById("modalCloseBtn");
+
+            function openCaseStudyModal(id) {
+                const project = portfolioData.projects.find(p => p.id === id);
+                if (!project) return;
+
+                modalBody.innerHTML = `
+                    <div class="project-category">${project.category} CASE STUDY</div>
+                    <h2 style="font-size: 1.8rem; margin-bottom: 1rem;">${project.title}</h2>
+                    
+                    <div class="modal-section-title">Business Problem</div>
+                    <p style="color: var(--text-muted);">${project.problem}</p>
+                    
+                    <div class="modal-section-title">Dataset Specification</div>
+                    <p style="color: var(--text-muted);">${project.dataset}</p>
+
+                    <div class="modal-section-title">Key Insights Discovered</div>
+                    <ul style="list-style-type: disc; padding-left: 1.25rem; color: var(--text-muted);">
+                        ${project.insights.map(i => `<li style="margin-bottom: 0.4rem;">${i}</li>`).join('')}
+                    </ul>
+
+                    <div class="modal-section-title">Strategic Recommendation</div>
+                    <p style="color: var(--text-muted);">${project.recommendations}</p>
+
+                    <div style="margin-top: 2rem; display: flex; gap: 1rem;">
+                        <a href="${project.github}" target="_blank" class="btn btn-primary">View GitHub Repo</a>
+                    </div>
+                `;
+
+                modal.classList.add("active");
+            }
+
+            modalCloseBtn.addEventListener("click", () => modal.classList.remove("active"));
+            modal.addEventListener("click", (e) => {
+                if (e.target === modal) modal.classList.remove("active");
+            });
+
+            // 8. SQL Interactive Lab Component
+            const sqlTabsContainer = document.getElementById("sqlTabs");
+            const sqlCodeDisplay = document.getElementById("sqlCodeDisplay");
+            const sqlResultOutput = document.getElementById("sqlResultOutput");
+            const sqlQuestionTitle = document.getElementById("sqlQuestionTitle");
+            const runSqlQueryBtn = document.getElementById("runSqlQueryBtn");
+
+            sqlTabsContainer.innerHTML = portfolioData.sqlExamples.map((sq, i) => `
+                <button class="sql-tab ${i === 0 ? 'active' : ''}" data-index="${i}">${sq.title}</button>
+            `).join('');
+
+            let activeSqlIndex = 0;
+            loadSqlQuery(0);
+
+            sqlTabsContainer.addEventListener("click", (e) => {
+                if (e.target.classList.contains("sql-tab")) {
+                    document.querySelectorAll(".sql-tab").forEach(t => t.classList.remove("active"));
+                    e.target.classList.add("active");
+                    activeSqlIndex = parseInt(e.target.dataset.index);
+                    loadSqlQuery(activeSqlIndex);
+                }
+            });
+
+            function loadSqlQuery(index) {
+                const sq = portfolioData.sqlExamples[index];
+                sqlQuestionTitle.innerText = `Focus Question: ${sq.question}`;
+                sqlCodeDisplay.innerText = sq.code;
+                sqlResultOutput.innerHTML = `<span style="font-size: 0.8rem; color: var(--text-subtle);">Click 'Run Query' to execute...</span>`;
+            }
+
+            runSqlQueryBtn.addEventListener("click", () => {
+                const sq = portfolioData.sqlExamples[activeSqlIndex];
+                
+                let tableHtml = `<table class="sql-table"><thead><tr>`;
+                sq.columns.forEach(col => tableHtml += `<th>${col}</th>`);
+                tableHtml += `</tr></thead><tbody>`;
+                
+                sq.rows.forEach(row => {
+                    tableHtml += `<tr>`;
+                    row.forEach(cell => tableHtml += `<td>${cell}</td>`);
+                    tableHtml += `</tr>`;
+                });
+                tableHtml += `</tbody></table>`;
+
+                sqlResultOutput.innerHTML = tableHtml;
+            });
+
+            // 9. Experience & Education Timelines
+            const experienceTimeline = document.getElementById("experienceTimeline");
+            experienceTimeline.innerHTML = portfolioData.experience.map(exp => `
+                <div class="timeline-item">
+                    <div class="timeline-date">${exp.period}</div>
+                    <div class="timeline-title">${exp.role}</div>
+                    <div class="timeline-company">${exp.company}</div>
+                    <ul class="timeline-bullets">
+                        ${exp.bullets.map(b => `<li>${b}</li>`).join('')}
+                    </ul>
+                </div>
+            `).join('');
+
+            const certsGrid = document.getElementById("certsGrid");
+            certsGrid.innerHTML = portfolioData.certifications.map(c => `
+                <div class="card cert-card">
+                    <div>
+                        <div class="cert-issuer">${c.issuer}</div>
+                        <div class="cert-name">${c.name}</div>
+                    </div>
+                    <div class="cert-date">Issued ${c.date} • Verified Credential</div>
+                </div>
+            `).join('');
+
+            const educationTimeline = document.getElementById("educationTimeline");
+            educationTimeline.innerHTML = portfolioData.education.map(ed => `
+                <div class="timeline-item">
+                    <div class="timeline-date">${ed.period}</div>
+                    <div class="timeline-title">${ed.degree}</div>
+                    <div class="timeline-company">${ed.school} (GPA: ${ed.gpa})</div>
+                    <p style="font-size: 0.85rem; color: var(--text-muted);">${ed.details}</p>
+                </div>
+            `).join('');
+
+            // 10. Chart.js Engines Initialization
+            // Hero Mini Chart
+            const ctxHero = document.getElementById('heroChart').getContext('2d');
+            new Chart(ctxHero, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        label: 'Revenue Growth',
+                        data: [12, 19, 15, 25, 22, 30],
+                        borderColor: '#38bdf8',
+                        backgroundColor: 'rgba(56, 189, 248, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { display: false },
+                        y: { display: false }
+                    }
+                }
+            });
+
+            // Interactive Data Story Chart
+            const ctxStory = document.getElementById('interactiveStoryChart').getContext('2d');
+            let storyChart = new Chart(ctxStory, {
+                type: 'bar',
+                data: {
+                    labels: ['Cohort M1', 'Cohort M2', 'Cohort M3', 'Cohort M4', 'Cohort M5', 'Cohort M6'],
+                    datasets: [{
+                        label: 'Retention Rate %',
+                        data: [100, 68, 45, 42, 40, 39],
+                        backgroundColor: '#3b82f6',
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#94a3b8' } }
+                    },
+                    scales: {
+                        x: { ticks: { color: '#94a3b8' }, grid: { display: false } },
+                        y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+                    }
+                }
+            });
+
+            // Toggle Chart Data Demo
+            let isAlternativeData = false;
+            document.getElementById('btnToggleChartData').addEventListener('click', () => {
+                if (!isAlternativeData) {
+                    storyChart.data.datasets[0].data = [100, 82, 75, 71, 69, 68];
+                    storyChart.data.datasets[0].label = 'Optimized Retention Rate %';
+                    storyChart.data.datasets[0].backgroundColor = '#10b981';
+                    document.getElementById('chartStoryTitle').innerText = "Post-Optimization Retention";
+                } else {
+                    storyChart.data.datasets[0].data = [100, 68, 45, 42, 40, 39];
+                    storyChart.data.datasets[0].label = 'Retention Rate %';
+                    storyChart.data.datasets[0].backgroundColor = '#3b82f6';
+                    document.getElementById('chartStoryTitle').innerText = "Baseline Cohort Retention";
+                }
+                storyChart.update();
+                isAlternativeData = !isAlternativeData;
+            });
+
+            // Contact Form Validation
+            document.getElementById('contactForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert("Thank you! Your message has been sent successfully.");
+                e.target.reset();
+            });
+        });
+    </script>
+</body>
+</html>
